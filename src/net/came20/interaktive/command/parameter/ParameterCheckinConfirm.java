@@ -1,9 +1,9 @@
-package net.came20.interaktive.Command.Parameter;
+package net.came20.interaktive.command.parameter;
 
 /**
  * Created by cameron on 8/9/2016.
  */
-public class ParameterCheckinRequest extends Parameter {
+public class ParameterCheckinConfirm extends Parameter {
     private String firstName;
     private String lastName;
     private String middleInitial;
@@ -12,7 +12,7 @@ public class ParameterCheckinRequest extends Parameter {
     private String seatNumber;
     private String ffNumber;
 
-    public ParameterCheckinRequest(String firstName, String lastName, String middleInitial, String finalDestination, String flightNumber, String seatNumber, String ffNumber) {
+    public ParameterCheckinConfirm(String firstName, String lastName, String middleInitial, String finalDestination, String flightNumber, String seatNumber, String ffNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleInitial = middleInitial;

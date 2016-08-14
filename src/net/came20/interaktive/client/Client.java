@@ -2,10 +2,10 @@ package net.came20.interaktive.client;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import net.came20.interaktive.Command.CommandRoutable;
-import net.came20.interaktive.Command.Commands;
-import net.came20.interaktive.Command.Parameter.ParameterCheckinConfirm;
-import net.came20.interaktive.Command.Parameter.ParameterCheckinRequest;
+import net.came20.interaktive.command.CommandRoutable;
+import net.came20.interaktive.command.Commands;
+import net.came20.interaktive.command.parameter.ParameterCheckinConfirm;
+import net.came20.interaktive.command.parameter.ParameterCheckinRequest;
 import net.came20.interaktive.LogHelper;
 import org.zeromq.ZMQ;
 

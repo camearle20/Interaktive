@@ -1,6 +1,8 @@
-package net.came20.interaktive.Command;
+package net.came20.interaktive.command;
 
-import net.came20.interaktive.Command.Parameter.Parameter;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import net.came20.interaktive.command.parameter.Parameter;
 
 /**
  * Created by cameron on 8/9/2016.
@@ -28,5 +30,10 @@ public class CommandRoutable {
 
     public void setParameter(Parameter parameter) {
         this.parameter = parameter;
+    }
+
+    @Override
+    public String toString() {
+        return new XStream(new DomDriver()).toXML(this);
     }
 }
