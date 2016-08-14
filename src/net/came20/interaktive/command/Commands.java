@@ -4,7 +4,15 @@ package net.came20.interaktive.command;
  * Created by cameron on 8/9/2016.
  */
 public enum Commands {
-    NONE,
+    NONE, //CS->CS
+
+    AUTH_FAIL, //S->C
+
+    //Login commands
+    LOGIN_REQUEST, //C->S
+    LOGIN_ACCEPT, //S->C
+    LOGIN_REJECT, //S->C
+
     //Checkin commands
     CHECKIN_REQUEST, //C->S
     CHECKIN_CONFIRM, //S->C

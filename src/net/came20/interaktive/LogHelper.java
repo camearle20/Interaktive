@@ -9,14 +9,21 @@ import sun.reflect.Reflection;
  */
 public class LogHelper {
     public static enum Levels {
-        DEBUG,
-        ERROR,
-        FATAL,
-        INFO,
-        WARN
+        DEBUG(0),
+        INFO(1),
+        WARN(2),
+        ERROR(3),
+        FATAL(4);
+        private int levelNumber;
+        private Levels(int levelNumber) {
+            this.levelNumber = levelNumber;
+        }
+        private int getLevelNumber() {
+            return this.levelNumber;
+        }
     }
 
-    public static Levels level = Levels.INFO;
+    public static Levels displayLevel = Levels.DEBUG;
 
     private Class from;
     public LogHelper(Class from) {
@@ -24,9 +31,12 @@ public class LogHelper {
     }
 
     public void log(Object message, Levels level) {
-        System.out.println("[" + Thread.currentThread().getName() + "] " + "[" + from.getName() + "] [" + level.toString() + "] " + message);
+        if (level.getLevelNumber() >= displayLevel.getLevelNumber()) {
+            System.out.println("[" + Thread.currentThread().getName() + "] " + "[" + from.getName() + "] [" + level.toString() + "] " + message);
+        }
     }
     public void log(Object message) {
-        System.out.println("[" + Thread.currentThread().getName() + "] " + "[" + from.getName() + "] [" + Levels.INFO.toString() + "] " + message);
+        Levels level = Levels.INFO;
+        log(message, level);
     }
 }

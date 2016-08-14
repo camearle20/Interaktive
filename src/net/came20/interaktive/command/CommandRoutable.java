@@ -10,10 +10,21 @@ import net.came20.interaktive.command.parameter.Parameter;
 public class CommandRoutable {
     private Commands command;
     private Parameter parameter;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public CommandRoutable(Commands command, Parameter parameter) {
         this.command = command;
+
         this.parameter = parameter;
+        this.token = token;
     }
 
     public Commands getCommand() {
