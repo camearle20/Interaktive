@@ -16,8 +16,12 @@ public class ActionLoginAuth {
     public static CommandRoutable execute(Commands command, ParameterLoginRequest parameter) {
         boolean valid_username = true; //debug
         boolean valid_password = true; //replace with sql queries
+        
+        System.out.println("-" + parameter.getUsername() + "-");
+        System.out.println("-" + parameter.getPassword() + "-");
 
-        if (parameter.getUsername() == "tom" && parameter.getPassword() == "foolery") {
+        if (parameter.getUsername().equals("tom") && parameter.getPassword().equals("foolery")) {
+            System.out.println("loggin in!");
             String token = Token.nextToken();
             Auth.addAuth(token);
             return new CommandRoutable(Commands.LOGIN_ACCEPT, new ParameterLoginAccept(token));

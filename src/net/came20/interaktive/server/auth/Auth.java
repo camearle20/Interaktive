@@ -10,7 +10,7 @@ public class Auth {
 
     public static boolean checkAuth(String token) {
         for (User user : authList) {
-            if (user.getToken() == token) {
+            if (user.getToken().equals(token)) {
                 return true;
             }
         }
@@ -18,7 +18,7 @@ public class Auth {
     }
     public static boolean removeAuth(String token) {
         for (User user : authList) {
-            if (user.getToken() == token) {
+            if (user.getToken().equals(token)) {
                 authList.remove(user);
                 return true;
             }
