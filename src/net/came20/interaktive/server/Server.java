@@ -14,12 +14,11 @@ public class Server {
     ZMQ.Context context = ZMQ.context(1);
     ZMQ.Socket commandSock = context.socket(ZMQ.ROUTER);
     ZMQ.Socket workerSock = context.socket(ZMQ.DEALER);
-    ZMQ.Socket announceSock = context.socket(ZMQ.PUB);
 
     public Server(int port) {
         commandSock.bind("tcp://*:" + port);
         workerSock.bind("inproc://interaktiveworkers");
-        announceSock.bind("tcp://*:" + (port + 1));
+        Announce.init(context, (port + 1));
         logger.log("All sockets connected");
 
         for (int worker_nbr = 0; worker_nbr < 5; worker_nbr++) {

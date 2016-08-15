@@ -12,19 +12,18 @@ public class CommandRoutable {
     private Parameter parameter;
     private String token;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
+    public CommandRoutable(Commands command, Parameter parameter, String token) {
+        this.command = command;
         this.token = token;
+        this.parameter = parameter;
     }
 
     public CommandRoutable(Commands command, Parameter parameter) {
-        this.command = command;
+        this(command, parameter, null);
+    }
 
-        this.parameter = parameter;
-        this.token = token;
+    public String getToken() {
+        return token;
     }
 
     public Commands getCommand() {

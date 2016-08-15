@@ -7,7 +7,10 @@ import net.came20.interaktive.command.Commands;
 import net.came20.interaktive.command.parameter.ParameterCheckinConfirm;
 import net.came20.interaktive.command.parameter.ParameterCheckinRequest;
 import net.came20.interaktive.LogHelper;
+import net.came20.interaktive.command.parameter.ParameterLoginReject;
+import net.came20.interaktive.command.parameter.ParameterLoginRequest;
 import org.zeromq.ZMQ;
+import org.zeromq.ZProxy;
 
 /**
  * Created by cameron on 8/9/2016.
@@ -23,6 +26,14 @@ public class Client {
     public Client(int port, String address) {
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
+
+        CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("tom", "foolery"));
+        String loginText = xstream.toXML(login);
+        commandSock.send(loginText);
+        logger.log("Logging in");
+        String returnlogintext = new String(commandSock.recv());
+        CommandRoutable returnlogin = (CommandRoutable) xstream.fromXML(returnlogintext);
+
         CommandRoutable command = new CommandRoutable(Commands.CHECKIN_REQUEST, new ParameterCheckinRequest("Jorge", "Gonzoles", "J", "Cuba", "DL564", "3D", "12345"));
         String commandtext = xstream.toXML(command);
         commandSock.send(commandtext);
