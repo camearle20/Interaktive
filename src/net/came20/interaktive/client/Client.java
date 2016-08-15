@@ -26,11 +26,11 @@ public class Client {
     ZMQ.Context context = ZMQ.context(1);
     ZMQ.Socket commandSock = context.socket(ZMQ.REQ);
     ZMQ.Socket announceSock = context.socket(ZMQ.SUB);
-    public Client(int port, String address) {
+    public Client(int port, String address, boolean showGui) {
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
 
-        CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("tom", "foolery"));
+        CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("thomas", "foolery"));
         String loginText = xstream.toXML(login);
         commandSock.send(loginText);
         logger.log("Logging in");

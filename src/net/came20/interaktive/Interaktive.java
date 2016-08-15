@@ -14,13 +14,17 @@ public class Interaktive {
     public static void main(String[] args) {
         logger.log("Starting!");
         String startArg = "none";
+        String guiArg = "none";
         try {
             startArg = args[0].toLowerCase();
+        } catch (Exception e) {}
+        try {
+            guiArg = args[1].toLowerCase();
         } catch (Exception e) {}
         switch (startArg) {
             case "client":
                 logger.log("Got client argument, starting client");
-                new Client(port, address);
+                new Client(port, address, (guiArg.equals("none")) ? false : true);
                 break;
             case "server":
                 logger.log("Got server argument, starting server");
@@ -28,7 +32,7 @@ public class Interaktive {
                 break;
             default:
                 logger.log("Got invalid argument, defaulting!");
-                new Client(port, address);
+                new Client(port, address, (guiArg.equals("none")) ? false : true);
                 break;
         }
     }
