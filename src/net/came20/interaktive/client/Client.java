@@ -1,10 +1,13 @@
 package net.came20.interaktive.client;
 
+import javax.swing.JOptionPane;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
+import net.came20.interaktive.command.parameter.Parameter;
 import net.came20.interaktive.command.parameter.ParameterCheckinConfirm;
 import net.came20.interaktive.command.parameter.ParameterCheckinRequest;
 import net.came20.interaktive.command.parameter.ParameterLoginAccept;
@@ -29,16 +32,28 @@ public class Client {
     public Client(int port, String address, boolean showGui) {
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
+        Parameter parameter;
 
-        CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("thomas", "foolery"));
+        CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("tom", "foolery"));
         String loginText = xstream.toXML(login);
         commandSock.send(loginText);
         logger.log("Logging in");
         String returnlogintext = new String(commandSock.recv());
         CommandRoutable returnlogin = (CommandRoutable) xstream.fromXML(returnlogintext);
-        ParameterLoginAccept loginparameter = (ParameterLoginAccept) returnlogin.getParameter();
+        parameter = returnlogin.getParameter();
+        String logintoken = "none";
+        switch (returnlogin.getCommand()) {
+            case LOGIN_ACCEPT:
+                logintoken = ((ParameterLoginAccept) parameter).getToken();
+                JOptionPane.showMessageDialog(null, "HOLA!", "InfoBox: " + "JUEVES", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case LOGIN_REJECT:
+                
+                break;
+        }
+        
 
-        String logintoken = loginparameter.getToken();
+
 
         CommandRoutable command = new CommandRoutable(Commands.CHECKIN_REQUEST, new ParameterCheckinRequest("Jorge", "Gonzoles", "J", "Cuba", "DL564", "3D", "12345"), logintoken);
         String commandtext = xstream.toXML(command);
@@ -49,14 +64,14 @@ public class Client {
         CommandRoutable commandreturned = (CommandRoutable) xstream.fromXML(returned);
         System.out.println(commandreturned.toString());
         if (commandreturned.getCommand() == Commands.CHECKIN_CONFIRM) {
-            ParameterCheckinConfirm parameter = (ParameterCheckinConfirm) commandreturned.getParameter();
-            System.out.println(parameter.getFirstName());
-            System.out.println(parameter.getLastName());
-            System.out.println(parameter.getMiddleInitial());
-            System.out.println(parameter.getFinalDestination());
-            System.out.println(parameter.getFlightNumber());
-            System.out.println(parameter.getSeatNumber());
-            System.out.println(parameter.getFfNumber());
+            parameter = commandreturned.getParameter();
+            System.out.println(((ParameterCheckinConfirm) parameter).getFirstName());
+            System.out.println(((ParameterCheckinConfirm) parameter).getLastName());
+            System.out.println(((ParameterCheckinConfirm) parameter).getMiddleInitial());
+            System.out.println(((ParameterCheckinConfirm) parameter).getFinalDestination());
+            System.out.println(((ParameterCheckinConfirm) parameter).getFlightNumber());
+            System.out.println(((ParameterCheckinConfirm) parameter).getSeatNumber());
+            System.out.println(((ParameterCheckinConfirm) parameter).getFfNumber());
             System.out.println("It worked!");
         }
     }

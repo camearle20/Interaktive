@@ -9,4 +9,16 @@ package net.came20.interaktive.command.parameter;
  * released by myself (came20), and should be used with caution
  */
 public class ParameterLoginReject extends Parameter {
+    private String reason;
+    public ParameterLoginReject(String reason) {
+        this.reason = reason;
+    }
+    
+    public String getReason() {
+        return this.reason;
+    }
+    
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }

@@ -3,6 +3,7 @@ package net.came20.interaktive.server;
 
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
+import net.came20.interaktive.command.parameter.Parameter;
 import net.came20.interaktive.command.parameter.ParameterAuthFail;
 import net.came20.interaktive.command.parameter.ParameterCheckinRequest;
 import net.came20.interaktive.command.parameter.ParameterLoginRequest;
@@ -15,10 +16,11 @@ import net.came20.interaktive.server.auth.Auth;
  */
 public class CommandRouter {
     static CommandRoutable response;
+    static Parameter parameter;
     public static CommandRoutable route(CommandRoutable command) {
+        parameter = command.getParameter();
         if (command.getCommand() == Commands.LOGIN_REQUEST) {
-            ParameterLoginRequest parameter = (ParameterLoginRequest) command.getParameter();
-            response = ActionLoginAuth.execute(Commands.LOGIN_REQUEST, parameter);
+            response = ActionLoginAuth.execute(Commands.LOGIN_REQUEST, (ParameterLoginRequest) parameter);
             return response;
         }
         if (!Auth.checkAuth(command.getToken())) {
@@ -26,8 +28,7 @@ public class CommandRouter {
         }
         switch (command.getCommand()) {
             case CHECKIN_REQUEST:
-                ParameterCheckinRequest parameter = (ParameterCheckinRequest) command.getParameter();
-                response = ActionCheckinConfirm.execute(Commands.CHECKIN_REQUEST, parameter);
+                response = ActionCheckinConfirm.execute(Commands.CHECKIN_REQUEST, (ParameterCheckinRequest) parameter);
                 break;
         }
         return response;
