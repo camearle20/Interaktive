@@ -1,9 +1,6 @@
 package net.came20.interaktive;
 
 
-import sun.reflect.Reflection;
-
-
 /**
  * Created by cameron on 8/9/2016.
  */
@@ -26,13 +23,26 @@ public class LogHelper {
     public static Levels displayLevel = Levels.DEBUG;
 
     private Class from;
+    private static boolean stdoutEnabled = true;
+    private static boolean fileEnabled = true;
+    
     public LogHelper(Class from) {
         this.from = from;
+    }
+    public static void setEnabled(Boolean fileEnabled, Boolean stdoutEnabled) {
+        if (fileEnabled != null) {
+            LogHelper.fileEnabled = fileEnabled;
+        }
+        if (stdoutEnabled != null) {
+            LogHelper.stdoutEnabled = stdoutEnabled;
+        }
     }
 
     public void log(Object message, Levels level) {
         if (level.getLevelNumber() >= displayLevel.getLevelNumber()) {
-            System.out.println("[" + Thread.currentThread().getName() + "] " + "[" + from.getName() + "] [" + level.toString() + "] " + message);
+            if (stdoutEnabled) {
+                System.out.println("[" + Thread.currentThread().getName() + "] " + "[" + from.getName() + "] [" + level.toString() + "] " + message);
+            }
         }
     }
     public void log(Object message) {
