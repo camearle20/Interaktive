@@ -1,7 +1,5 @@
 package net.came20.interaktive.client;
 
-import javax.swing.JOptionPane;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -32,6 +30,16 @@ public class Client {
     public Client(int port, String address, boolean showGui) {
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
+        Thread cmdThread;
+        if (showGui) {
+            //cmdThread = new Thread(GUI, "Interpreter");
+            cmdThread = null;
+        } else {
+            cmdThread = new Thread(new CLI(), "Interpreter");
+        }
+        
+        cmdThread.start();
+        
         Parameter parameter;
 
         CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("tom", "foolery"));
@@ -45,10 +53,8 @@ public class Client {
         switch (returnlogin.getCommand()) {
             case LOGIN_ACCEPT:
                 logintoken = ((ParameterLoginAccept) parameter).getToken();
-                JOptionPane.showMessageDialog(null, "HOLA!", "InfoBox: " + "JUEVES", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case LOGIN_REJECT:
-                
                 break;
         }
         
