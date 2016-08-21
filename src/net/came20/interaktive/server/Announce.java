@@ -1,5 +1,6 @@
 package net.came20.interaktive.server;
 
+import net.came20.interaktive.command.AnnouncementRoutable;
 import org.zeromq.ZMQ;
 
 /**
@@ -19,7 +20,7 @@ public class Announce {
         socket.bind("tcp://*:" + port);
     }
 
-    public static void announce(String message) {
-        socket.send(message);
+    public static void announce(AnnouncementRoutable message) {
+        socket.send(message.toString());
     }
 }

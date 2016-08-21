@@ -3,6 +3,7 @@ package net.came20.interaktive.client;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import net.came20.interaktive.client.gui.LoginForm;
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
 import net.came20.interaktive.command.parameter.Parameter;
@@ -28,6 +29,7 @@ public class Client {
     ZMQ.Socket commandSock = context.socket(ZMQ.REQ);
     ZMQ.Socket announceSock = context.socket(ZMQ.SUB);
     public Client(int port, String address, boolean showGui) {
+        new LoginForm();
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
         Thread cmdThread;
