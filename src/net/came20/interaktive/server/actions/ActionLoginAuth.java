@@ -19,13 +19,15 @@ public class ActionLoginAuth {
         boolean valid_username = true; //debug
         boolean valid_password = true; //replace with sql queries
 
+        logger.log("Authenticating user [" + parameter.getUsername() + "]");
+
         if (parameter.getUsername().equals("tom") && parameter.getPassword().equals("foolery")) {
-            logger.log("Authenticating user [" + parameter.getUsername() + "]");
             String token = Token.nextToken();
-            Auth.addAuth(token);
+            Auth.addAuth(token, parameter.getUsername());
             logger.log("Authenticated user [" + parameter.getUsername() + "] with token [" + token + "]");
             return new CommandRoutable(Commands.LOGIN_ACCEPT, new ParameterLoginAccept(token));
         } else {
+            logger.log("Failed to authenticate user [" + parameter.getUsername() + "]");
             return new CommandRoutable(Commands.LOGIN_REJECT, new ParameterLoginReject("Invalid Login"));
         }
     }

@@ -29,7 +29,6 @@ public class Client {
     ZMQ.Socket commandSock = context.socket(ZMQ.REQ);
     ZMQ.Socket announceSock = context.socket(ZMQ.SUB);
     public Client(int port, String address, boolean showGui) {
-        new LoginForm();
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
         Thread cmdThread;
@@ -51,12 +50,13 @@ public class Client {
         String returnlogintext = new String(commandSock.recv());
         CommandRoutable returnlogin = (CommandRoutable) xstream.fromXML(returnlogintext);
         parameter = returnlogin.getParameter();
-        String logintoken = "none";
+        String logintoken = null;
         switch (returnlogin.getCommand()) {
             case LOGIN_ACCEPT:
                 logintoken = ((ParameterLoginAccept) parameter).getToken();
                 break;
             case LOGIN_REJECT:
+                logger.log("Login rejected for reason: " + ((ParameterLoginReject) returnlogin.getParameter()).getReason());
                 break;
         }
         

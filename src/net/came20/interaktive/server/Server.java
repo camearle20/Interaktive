@@ -22,8 +22,7 @@ public class Server {
         logger.log("All sockets connected");
 
         for (int worker_nbr = 0; worker_nbr < 5; worker_nbr++) {
-            Thread worker = new ClientListener(context);
-            worker.setName("Listener " + worker_nbr);
+            Thread worker = new Thread(new ClientListener(context), "Listener " + worker_nbr);
             worker.start();
             logger.log("Started Listener " + worker_nbr);
         }

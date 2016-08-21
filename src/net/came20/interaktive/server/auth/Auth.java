@@ -25,13 +25,22 @@ public class Auth {
         }
         return false;
     }
-    public static boolean addAuth(String token) {
+    public static boolean addAuth(String token, String username) {
         try {
-            authList.add(new User(token, System.currentTimeMillis() / 1000L));
+            authList.add(new User(token, username, System.currentTimeMillis() / 1000L));
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static String getUsername(String token) {
+        for (User user : authList) {
+            if (user.getToken().equals(token)) {
+                return user.getUsername();
+            }
+        }
+        return null;
     }
     protected static ArrayList<User> getAuthList() {
         return authList;
