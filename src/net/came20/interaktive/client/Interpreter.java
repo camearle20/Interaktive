@@ -10,7 +10,7 @@ public class Interpreter implements Runnable {
         Thread.currentThread().destroy();
     }
 
-    public void display(String message) {
-        System.out.println(message);
+    public void display(Object message) {
+        System.out.println(message.toString());
     }
 }
