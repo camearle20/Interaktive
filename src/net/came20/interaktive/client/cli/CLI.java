@@ -30,4 +30,9 @@ public class CLI extends Interpreter {
         logger.log("Got response");
         System.out.println(response.toString());
     }
+
+    @Override
+    public String[] login() {
+        return new String[0];
+    }
 }

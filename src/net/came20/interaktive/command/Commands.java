@@ -13,6 +13,11 @@ public enum Commands {
     LOGIN_ACCEPT, //S->C
     LOGIN_REJECT, //S->C
 
+    //Logout commands
+    LOGOUT_REQUEST, //C->S
+    LOGOUT_ACCEPT, //S->C
+    LOGOUT_REJECT, //S->C
+
     //Checkin commands
     CHECKIN_REQUEST, //C->S
     CHECKIN_CONFIRM, //S->C
