@@ -29,6 +29,24 @@ public class CLI extends Interpreter {
         CommandRoutable response = Client.sendCommand(command);
         logger.log("Got response");
         System.out.println(response.toString());
+        //debug kicker testing
+        logger.log("Starting kicker test");
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {}
+        CommandRoutable command3 = new CommandRoutable(Commands.CHECKIN_REQUEST, new ParameterCheckinRequest("Jorge", "Gonzoles", "J", "Cuba", "DL564", "3D", "12345"), token);
+        CommandRoutable response3 = Client.sendCommand(command);
+        logger.log("Got response");
+        System.out.println(response3.toString());
+        logger.log("Kicker test 1 done, kicker test 2 starting");
+        try{
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {}
+        CommandRoutable command2 = new CommandRoutable(Commands.CHECKIN_REQUEST, new ParameterCheckinRequest("Jorge", "Gonzoles", "J", "Cuba", "DL564", "3D", "12345"), token);
+        CommandRoutable response2 = Client.sendCommand(command);
+        logger.log("Got response");
+        System.out.println(response2.toString());
+        logger.log("Kicker test ended");
     }
 
     @Override

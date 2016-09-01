@@ -25,6 +25,8 @@ public class CommandRouter {
         }
         if (!Auth.checkAuth(command.getToken())) {
             return new CommandRoutable(Commands.AUTH_FAIL, new ParameterAuthFail());
+        } else {
+            Auth.updateTime(command.getToken());
         }
         switch (command.getCommand()) {
             case CHECKIN_REQUEST:

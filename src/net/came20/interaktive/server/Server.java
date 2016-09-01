@@ -2,6 +2,8 @@ package net.came20.interaktive.server;
 
 
 import net.came20.interaktive.LogHelper;
+import net.came20.interaktive.server.auth.InactiveLogout;
+
 import org.zeromq.ZMQ;
 
 /**
@@ -26,6 +28,11 @@ public class Server {
             worker.start();
             logger.log("Started Listener " + worker_nbr);
         }
+        
+        Thread inactiveLogout = new Thread(new InactiveLogout(), "Inactivity Kicker");
+        inactiveLogout.start();
+        logger.log("Started the Inactivity Kicker");
+        
         logger.log("Bridging listeners to clients, bye!");
 
         ZMQ.proxy(commandSock, workerSock, null);

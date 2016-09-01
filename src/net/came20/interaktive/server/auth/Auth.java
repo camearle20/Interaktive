@@ -33,6 +33,24 @@ public class Auth {
             return false;
         }
     }
+    
+    public static void updateTime(String token) {
+        if (token != null) {
+            long currentTime = System.currentTimeMillis() / 1000L;
+            User user = getUser(token);
+            user.updateTime(currentTime);
+        }
+    }
+    
+    
+    private static User getUser(String token) {
+        for (User user : authList) {
+            if (user.getToken().equals(token)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
     public static String getUsername(String token) {
         for (User user : authList) {

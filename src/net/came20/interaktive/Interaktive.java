@@ -14,7 +14,7 @@ public class Interaktive {
     public static void main(String[] args) {
         logger.log("Starting!");
         String startArg = "none";
-        String guiArg = "true";
+        String guiArg = "none";
         try {
             startArg = args[0].toLowerCase();
         } catch (Exception e) {}
