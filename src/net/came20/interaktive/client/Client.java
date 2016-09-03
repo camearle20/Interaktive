@@ -50,24 +50,6 @@ public class Client {
         commandSock.connect("tcp://" + address + ":" + port);
         announceSock.connect("tcp://" + address + ":" + (port + 1));
 
-        
-        Parameter parameter;
-
-        CommandRoutable login = new CommandRoutable(Commands.LOGIN_REQUEST, new ParameterLoginRequest("tom", "foolery"));
-        String loginText = xstream.toXML(login);
-        commandSock.send(loginText);
-        logger.log("Logging in");
-        String returnlogintext = new String(commandSock.recv());
-        CommandRoutable returnlogin = (CommandRoutable) xstream.fromXML(returnlogintext);
-        parameter = returnlogin.getParameter();
-        switch (returnlogin.getCommand()) {
-            case LOGIN_ACCEPT:
-                token = ((ParameterLoginAccept) parameter).getToken();
-                break;
-            case LOGIN_REJECT:
-                logger.log("Login rejected for reason: " + ((ParameterLoginReject) returnlogin.getParameter()).getReason());
-                break;
-        }
         if (showGui) {
             interpreter = new GUI();
         } else {
@@ -76,7 +58,5 @@ public class Client {
 
         Thread cmdThread = new Thread(interpreter, "Interpreter");
         cmdThread.start();
-
-        interpreter.login();
     }
 }

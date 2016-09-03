@@ -21,7 +21,7 @@ public class ActionLoginAuth {
 
         logger.log("Authenticating user [" + parameter.getUsername() + "]");
 
-        if (parameter.getUsername().equals("tom") && parameter.getPassword().equals("foolery")) {
+        if ((parameter.getUsername().equals("tom") && parameter.getPassword().equals("foolery")) || (parameter.getUsername().equals("billy") && parameter.getPassword().equals("bob"))) {
             String token = Token.nextToken();
             Auth.addAuth(token, parameter.getUsername());
             logger.log("Authenticated user [" + parameter.getUsername() + "] with token [" + token + "]");

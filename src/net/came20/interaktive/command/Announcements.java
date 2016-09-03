@@ -6,6 +6,7 @@ package net.came20.interaktive.command;
 public enum Announcements {
     CLIENT_CONNECT,
     CLIENT_DISCONNECT,
+    CLIENT_KICKED,
     SERVER_RUNNING,
     SERVER_STOPPED
 }
