@@ -15,7 +15,7 @@ import net.came20.interaktive.LogHelper;
  */
 public class ActionLoginAuth {
     static LogHelper logger = new LogHelper(ActionLoginAuth.class);
-    public static CommandRoutable execute(Commands command, ParameterLoginRequest parameter) {
+    public static CommandRoutable execute(ParameterLoginRequest parameter) {
         boolean valid_username = true; //debug
         boolean valid_password = true; //replace with sql queries
 

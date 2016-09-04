@@ -20,7 +20,7 @@ public class CommandRouter {
     public static CommandRoutable route(CommandRoutable command) {
         parameter = command.getParameter();
         if (command.getCommand() == Commands.LOGIN_REQUEST) {
-            response = ActionLoginAuth.execute(Commands.LOGIN_REQUEST, (ParameterLoginRequest) parameter);
+            response = ActionLoginAuth.execute((ParameterLoginRequest) parameter);
             return response;
         }
         if (!Auth.checkAuth(command.getToken())) {
@@ -30,7 +30,7 @@ public class CommandRouter {
         }
         switch (command.getCommand()) {
             case CHECKIN_REQUEST:
-                response = ActionCheckinConfirm.execute(Commands.CHECKIN_REQUEST, (ParameterCheckinRequest) parameter);
+                response = ActionCheckinConfirm.execute((ParameterCheckinRequest) parameter);
                 break;
         }
         return response;

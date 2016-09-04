@@ -18,12 +18,6 @@ public class GUI extends Interpreter {
     }
 
     @Override
-    public String[] login() {
-        logger.log("From thread test");
-        return new String[]{"HELLO"};
-    }
-
-    @Override
     public void display(Object message) {
         JOptionPane.showMessageDialog(null, message.toString(), "Message", JOptionPane.INFORMATION_MESSAGE);
     }

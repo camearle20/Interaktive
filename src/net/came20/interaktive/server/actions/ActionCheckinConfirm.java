@@ -12,7 +12,7 @@ import net.came20.interaktive.command.parameter.ParameterCheckinRequest;
  */
 public class ActionCheckinConfirm {
     static LogHelper logger = new LogHelper(ActionCheckinConfirm.class);
-    public static CommandRoutable execute(Commands command, ParameterCheckinRequest parameter) {
+    public static CommandRoutable execute(ParameterCheckinRequest parameter) {
         logger.log("Building confirm response");
         return new CommandRoutable(Commands.CHECKIN_CONFIRM, new ParameterCheckinConfirm(parameter.getFirstName(),
                 parameter.getLastName(), parameter.getMiddleInitial(), parameter.getFinalDestination(),

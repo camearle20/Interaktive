@@ -22,11 +22,15 @@ public class Client {
 
     static ZMQ.Context context = ZMQ.context(1);
     static ZMQ.Socket commandSock = context.socket(ZMQ.REQ);
-    static ZMQ.Socket announceSock = context.socket(ZMQ.SUB);
 
     static Interpreter interpreter;
+    static AnnounceListener announce;
 
     static String token = null;
+
+    public static Interpreter getInterpreter() {
+        return interpreter;
+    }
 
     public static CommandRoutable sendCommand(CommandRoutable command) {
         commandSock.send(command.toString());
@@ -37,23 +41,17 @@ public class Client {
         interpreter.display(command);
     }
 
-    public static void logout(boolean doExit) {
-        sendCommand(new CommandRoutable(Commands.LOGOUT_REQUEST, new ParameterLogoutRequest(token)));
-        if (doExit) {
-            System.exit(0);
-        } else {
-            interpreter.login();
-        }
-    }
-
     public Client(int port, String address, boolean showGui) {
         commandSock.connect("tcp://" + address + ":" + port);
-        announceSock.connect("tcp://" + address + ":" + (port + 1));
+        AnnounceListener.init(context, address, (port + 1));
+        announce = new AnnounceListener();
+        Thread announceThread = new Thread(announce, "Announce Listener");
+        announceThread.start();
 
         if (showGui) {
             interpreter = new GUI();
         } else {
-            interpreter = new CLI(token);
+            interpreter = new CLI();
         }
 
         Thread cmdThread = new Thread(interpreter, "Interpreter");

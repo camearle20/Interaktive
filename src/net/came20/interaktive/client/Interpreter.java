@@ -10,6 +10,4 @@ public abstract class Interpreter implements Runnable {
     public void display(Object message) {
         System.out.println(message.toString());
     }
-
-    public abstract String[] login();
 }

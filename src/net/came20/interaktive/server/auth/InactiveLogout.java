@@ -25,6 +25,7 @@ public class InactiveLogout implements Runnable {
                     Auth.removeAuth(user.getToken());
                     ArrayList<String> annArgs = new ArrayList<String>();
                     annArgs.add(user.getToken());
+                    annArgs.add("Inactivity");
                     Announce.announce(new AnnouncementRoutable(Announcements.CLIENT_KICKED, annArgs));
                     logger.log("Removed user [" + user.getUsername() + "] with token [" + user.getToken() + "] for inactivity");
                     break;
