@@ -2,19 +2,38 @@ package net.came20.interaktive.client.gui;
 
 import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.client.Interpreter;
-import javax.swing.JOptionPane;
+import net.came20.interaktive.client.gui.dialog.InteraktiveSplash;
+import net.came20.interaktive.client.gui.dialog.ServerSelectDialog;
+
+import javax.swing.*;
+
 /**
  * Created by cameronearle on 8/27/16.
  */
 public class GUI extends Interpreter {
 
-    LogHelper logger = new LogHelper(this.getClass());
-    LoginDialog dialog;
-
     @Override
     public void run() {
-        LoginDialog.start();
-        dialog = LoginDialog.getDialog();
+        Thread splashThread = new InteraktiveSplash("/resources/splash.png", new JFrame(), 5000).getSplashThread();
+        try {
+            splashThread.join();
+        } catch (InterruptedException e) {}
+
+        //Splashscreen done, continue
+
+        main: while (true) {
+            serverselect: while (true) {
+                ServerSelectDialog serverSelectDialog = new ServerSelectDialog();
+                serverSelectDialog.pack();
+                serverSelectDialog.setLocationRelativeTo(null);
+                serverSelectDialog.setVisible(true);
+                if (!serverSelectDialog.getResponse()) { //Cancel clicked, kill the program
+                    System.exit(0);
+                }
+                //OK clicked, continue
+            }
+
+        }
     }
 
     @Override

@@ -54,7 +54,8 @@ public class Client {
             interpreter = new CLI();
         }
 
-        Thread cmdThread = new Thread(interpreter, "Interpreter");
-        cmdThread.start();
+        //Thread cmdThread = new Thread(interpreter, "Interpreter");
+        //cmdThread.start();
+        interpreter.run();
     }
 }

@@ -25,6 +25,7 @@ public class CLI extends Interpreter {
     @Override
     public void run() {
         //LogHelper.setEnabled(null, false);
+        main:
         while (true) {
             String username = null;
             String password = null;

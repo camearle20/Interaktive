@@ -1,18 +1,17 @@
-package net.came20.interaktive.client.gui;
+package net.came20.interaktive.client.gui.dialog;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class LoginDialog extends JDialog {
-    private static LoginDialog dialog;
+public class ServerSelectDialog extends JDialog {
+    private boolean response;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JPasswordField passwordField1;
-    private JTextField textField1;
-    private JProgressBar progressBar1;
+    private JComboBox comboBox1;
 
-    public LoginDialog() {
+    public ServerSelectDialog() {
+        setResizable(false);
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -46,31 +45,16 @@ public class LoginDialog extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
+        response = true;
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
+        response = false;
         dispose();
-        System.exit(1);
     }
 
-    public String getUsername() {
-        return dialog.textField1.getText();
-    }
-
-    public String getPassword() {
-        return dialog.passwordField1.getText();
-    }
-
-    public static LoginDialog getDialog() {
-        return dialog;
-    }
-
-    public static void start() {
-        LoginDialog dialog = new LoginDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+    public boolean getResponse() {
+        return response;
     }
 }
