@@ -15,13 +15,13 @@ public class Interaktive {
         logger.log("Starting!");
         String startArg = "none";
         String guiArg = "";
-        //String guiArg = "nogui";
+        //String guiArg = "";
         try {
             startArg = args[0].toLowerCase();
         } catch (Exception e) {}
-        try {
-            guiArg = args[1].toLowerCase();
-        } catch (Exception e) {}
+        //try {
+        //    guiArg = args[1].toLowerCase();
+        //} catch (Exception e) {}
         switch (startArg) {
             case "client":
                 logger.log("Got client argument, starting client");

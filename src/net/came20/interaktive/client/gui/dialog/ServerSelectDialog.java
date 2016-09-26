@@ -8,10 +8,14 @@ public class ServerSelectDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JTextField addressField;
+    private JSpinner portSpinner;
     private JComboBox comboBox1;
 
     public ServerSelectDialog() {
         setResizable(false);
+        portSpinner.setEditor(new JSpinner.NumberEditor(portSpinner, "#"));
+        portSpinner.setValue(5260);
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -56,5 +60,9 @@ public class ServerSelectDialog extends JDialog {
 
     public boolean getResponse() {
         return response;
+    }
+
+    public String getServer() {
+        return ((String) addressField.getText() + ":" + portSpinner.getValue());
     }
 }

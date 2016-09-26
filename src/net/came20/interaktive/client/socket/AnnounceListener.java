@@ -1,6 +1,7 @@
-package net.came20.interaktive.client;
+package net.came20.interaktive.client.socket;
 
 import net.came20.interaktive.LogHelper;
+import net.came20.interaktive.client.AnnouncementRouter;
 import net.came20.interaktive.command.AnnouncementRoutable;
 import org.zeromq.ZMQ;
 

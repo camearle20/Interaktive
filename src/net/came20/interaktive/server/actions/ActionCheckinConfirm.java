@@ -14,6 +14,9 @@ public class ActionCheckinConfirm {
     static LogHelper logger = new LogHelper(ActionCheckinConfirm.class);
     public static CommandRoutable execute(ParameterCheckinRequest parameter) {
         logger.log("Building confirm response");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {}
         return new CommandRoutable(Commands.CHECKIN_CONFIRM, new ParameterCheckinConfirm(parameter.getFirstName(),
                 parameter.getLastName(), parameter.getMiddleInitial(), parameter.getFinalDestination(),
                 parameter.getFlightNumber(), parameter.getSeatNumber(), parameter.getFfNumber()));

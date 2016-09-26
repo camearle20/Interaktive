@@ -16,6 +16,10 @@ public class AnnouncementRoutable {
         this.args = args;
     }
 
+    public AnnouncementRoutable(Announcements announcement) {
+        this(announcement, new ArrayList<String>());
+    }
+
     public AnnouncementRoutable(String encoded) {
         List<String> items = Arrays.asList(encoded.split(","));
         boolean gotAnnouncement = false;

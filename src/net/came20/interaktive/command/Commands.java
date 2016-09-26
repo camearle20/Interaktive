@@ -6,6 +6,9 @@ package net.came20.interaktive.command;
 public enum Commands {
     NONE, //CS->CS
 
+    PING_REQUEST, //C->S
+    PING_RESPONSE, //S->C
+
     AUTH_FAIL, //S->C
 
     //Login commands

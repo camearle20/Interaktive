@@ -1,6 +1,7 @@
 package net.came20.interaktive.client;
 
 
+import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.command.AnnouncementRoutable;
 import net.came20.interaktive.command.Announcements;
 
@@ -21,6 +22,9 @@ public class AnnouncementRouter {
                     System.exit(143);
                 }
                 break;
+            case SERVER_HEARTBEAT:
+                new LogHelper(AnnouncementRouter.class).log("Got heartbeat from server");
+                HeartbeatListener.updateTime();
             default:
                 break;
         }

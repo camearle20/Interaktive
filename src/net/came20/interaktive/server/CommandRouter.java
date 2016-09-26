@@ -22,6 +22,9 @@ public class CommandRouter {
         if (command.getCommand() == Commands.LOGIN_REQUEST) {
             response = ActionLoginAuth.execute((ParameterLoginRequest) parameter);
             return response;
+        } else if (command.getCommand() == Commands.PING_REQUEST) {
+            response = new CommandRoutable(Commands.PING_RESPONSE, new Parameter());
+            return response;
         }
         if (!Auth.checkAuth(command.getToken())) {
             return new CommandRoutable(Commands.AUTH_FAIL, new ParameterAuthFail());

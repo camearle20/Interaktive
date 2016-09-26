@@ -3,7 +3,9 @@ package net.came20.interaktive.client.gui;
 import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.client.Interpreter;
 import net.came20.interaktive.client.gui.dialog.InteraktiveSplash;
+import net.came20.interaktive.client.gui.dialog.ServerConnectDialog;
 import net.came20.interaktive.client.gui.dialog.ServerSelectDialog;
+import net.came20.interaktive.client.socket.CommandSock;
 
 import javax.swing.*;
 
@@ -30,7 +32,19 @@ public class GUI extends Interpreter {
                 if (!serverSelectDialog.getResponse()) { //Cancel clicked, kill the program
                     System.exit(0);
                 }
-                //OK clicked, continue
+                String server = serverSelectDialog.getServer();
+                //System.out.println(CommandSock.poll(server));
+                ServerConnectDialog serverConnectDialog = new ServerConnectDialog(server);
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        serverConnectDialog.pack();
+                        serverConnectDialog.setLocationRelativeTo(null);
+                        serverConnectDialog.setVisible(true);
+                    }
+                });
+                ServerPinger pinger = new ServerPinger(server, serverConnectDialog);
+                pinger.run();
+                boolean pingResult = pinger.getResult();
             }
 
         }

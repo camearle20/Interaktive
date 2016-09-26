@@ -8,5 +8,6 @@ public enum Announcements {
     CLIENT_DISCONNECT,
     CLIENT_KICKED,
     SERVER_RUNNING,
-    SERVER_STOPPED
+    SERVER_STOPPED,
+    SERVER_HEARTBEAT
 }

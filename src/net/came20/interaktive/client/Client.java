@@ -5,12 +5,13 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import net.came20.interaktive.client.cli.CLI;
 import net.came20.interaktive.client.gui.GUI;
+import net.came20.interaktive.client.socket.AnnounceListener;
 import net.came20.interaktive.command.CommandRoutable;
-import net.came20.interaktive.command.Commands;
-import net.came20.interaktive.command.parameter.*;
 import net.came20.interaktive.LogHelper;
 
 import org.zeromq.ZMQ;
+
+import javax.swing.*;
 
 /**
  * Created by cameron on 8/9/2016.
@@ -25,6 +26,7 @@ public class Client {
 
     static Interpreter interpreter;
     static AnnounceListener announce;
+    static HeartbeatListener heartbeat;
 
     static String token = null;
 
@@ -42,15 +44,24 @@ public class Client {
     }
 
     public Client(int port, String address, boolean showGui) {
+        try {
+            // Set cross-platform Java L&F (also called "Metal")
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {}
         commandSock.connect("tcp://" + address + ":" + port);
         AnnounceListener.init(context, address, (port + 1));
         announce = new AnnounceListener();
         Thread announceThread = new Thread(announce, "Announce Listener");
         announceThread.start();
+        heartbeat = new HeartbeatListener();
+        Thread heartbeatThread = new Thread(heartbeat, "Heartbeat Listener");
+        heartbeatThread.start();
 
         if (showGui) {
+            logger.log("Starting GUI");
             interpreter = new GUI();
         } else {
+            logger.log("Starting CLI");
             interpreter = new CLI();
         }
 

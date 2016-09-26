@@ -32,6 +32,10 @@ public class Server {
         Thread inactiveLogout = new Thread(new InactiveLogout(), "Inactivity Kicker");
         inactiveLogout.start();
         logger.log("Started the Inactivity Kicker");
+
+        Thread heartbeat = new Thread(new Heartbeat(), "Heartbeat");
+        heartbeat.start();
+        logger.log("Started heartbeat");
         
         logger.log("Bridging listeners to clients, bye!");
 
