@@ -1,20 +1,12 @@
 package net.came20.interaktive.client.cli;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.client.Auth;
 import net.came20.interaktive.client.Client;
 import net.came20.interaktive.client.Interpreter;
-import net.came20.interaktive.command.AnnouncementRoutable;
-import net.came20.interaktive.command.Announcements;
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
 import net.came20.interaktive.command.parameter.*;
-import net.came20.interaktive.server.Announce;
-import org.zeromq.ZMQ;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CLI extends Interpreter {

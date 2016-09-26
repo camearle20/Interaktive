@@ -3,11 +3,9 @@ package net.came20.interaktive.client.socket;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import net.came20.interaktive.LogHelper;
-import net.came20.interaktive.command.AnnouncementRoutable;
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
 import net.came20.interaktive.command.parameter.Parameter;
-import net.came20.interaktive.server.Announce;
 import org.zeromq.ZMQ;
 
 /**

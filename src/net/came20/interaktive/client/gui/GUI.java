@@ -1,11 +1,9 @@
 package net.came20.interaktive.client.gui;
 
-import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.client.Interpreter;
 import net.came20.interaktive.client.gui.dialog.InteraktiveSplash;
 import net.came20.interaktive.client.gui.dialog.ServerConnectDialog;
 import net.came20.interaktive.client.gui.dialog.ServerSelectDialog;
-import net.came20.interaktive.client.socket.CommandSock;
 
 import javax.swing.*;
 

@@ -3,7 +3,6 @@ package net.came20.interaktive.client;
 
 import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.command.AnnouncementRoutable;
-import net.came20.interaktive.command.Announcements;
 
 
 import java.util.ArrayList;

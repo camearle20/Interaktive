@@ -3,7 +3,6 @@ package net.came20.interaktive.server.actions;
 import net.came20.interaktive.LogHelper;
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
-import net.came20.interaktive.command.parameter.Parameter;
 import net.came20.interaktive.command.parameter.ParameterCheckinConfirm;
 import net.came20.interaktive.command.parameter.ParameterCheckinRequest;
 
