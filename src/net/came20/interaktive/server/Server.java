@@ -13,11 +13,16 @@ public class Server {
 
     LogHelper logger = new LogHelper(this.getClass());
 
-    ZMQ.Context context = ZMQ.context(1);
-    ZMQ.Socket commandSock = context.socket(ZMQ.ROUTER);
-    ZMQ.Socket workerSock = context.socket(ZMQ.DEALER);
+    ZMQ.Context context;
+    ZMQ.Socket commandSock;
+    ZMQ.Socket workerSock;
 
-    public Server(int port) {
+    public Server(ZMQ.Context context, int port) {
+        this.context = context;
+
+        commandSock = this.context.socket(ZMQ.ROUTER);
+        workerSock = this.context.socket(ZMQ.DEALER);
+
         commandSock.bind("tcp://*:" + port);
         workerSock.bind("inproc://interaktiveworkers");
         Announce.init(context, (port + 1));

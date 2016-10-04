@@ -1,7 +1,7 @@
 package net.came20.interaktive.client.gui;
 
 import net.came20.interaktive.client.gui.dialog.ServerConnectDialog;
-import net.came20.interaktive.client.socket.CommandSock;
+import net.came20.interaktive.client.socket.PollSock;
 
 
 /**
@@ -23,7 +23,7 @@ public class ServerPinger implements Runnable {
         dialog.setProgress(0);
         dialog.setUnknownProgress(true);
         dialog.setStatus("Polling");
-        boolean result = CommandSock.poll(address);
+        boolean result = PollSock.poll(address);
         dialog.setProgress(50);
         dialog.setUnknownProgress(false);
         dialog.setStatus("Checking");

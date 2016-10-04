@@ -11,24 +11,9 @@ import org.zeromq.ZMQ;
 /**
  * Created by cameronearle on 9/23/16.
  */
-public class CommandSock {
+public class PollSock {
 
-    private static ZMQ.Context context;
-    private static ZMQ.Socket socket;
-    static LogHelper logger = new LogHelper(CommandSock.class);
-    public static void init(ZMQ.Context context, String address) {
-        CommandSock.context = context;
-        socket = context.socket(ZMQ.REQ);
-        socket.setReceiveTimeOut(120000);
-        socket.bind("tcp://" + address);
-        logger.log("Connected to command socket");
-    }
-
-    public static CommandRoutable send(CommandRoutable message) {
-        socket.send(message.toString());
-        logger.log("Sent Command: [" + message.getCommand().toString() + "]");
-        return ((CommandRoutable) new XStream(new DomDriver()).fromXML(new String(socket.recv())));
-    }
+    static LogHelper logger = new LogHelper(PollSock.class);
 
     public static boolean poll(String address) {
         ZMQ.Context pollcontext = ZMQ.context(1);

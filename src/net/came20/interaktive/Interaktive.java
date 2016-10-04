@@ -3,6 +3,7 @@ package net.came20.interaktive;
 
 import net.came20.interaktive.client.Client;
 import net.came20.interaktive.server.Server;
+import org.zeromq.ZMQ;
 
 /**
  * Created by cameron on 8/9/2016.
@@ -13,6 +14,10 @@ public class Interaktive {
     static final String address = "localhost";
     public static void main(String[] args) {
         logger.log("Starting!");
+
+        ZMQ.Context context = ZMQ.context(1);
+
+        logger.log("Created context");
         String startArg = "none";
         String guiArg = "";
         //String guiArg = "";
@@ -25,16 +30,18 @@ public class Interaktive {
         switch (startArg) {
             case "client":
                 logger.log("Got client argument, starting client");
-                new Client(port, address, !guiArg.equals("nogui"));
+                new Client(context, !guiArg.equals("nogui"));
                 break;
             case "server":
                 logger.log("Got server argument, starting server");
-                new Server(port);
+                new Server(context, port);
                 break;
             default:
                 logger.log("Got invalid argument, defaulting!");
-                new Client(port, address, !guiArg.equals("nogui"));
+                new Client(context, !guiArg.equals("nogui"));
                 break;
         }
+        context.term();
+        logger.log("Exiting!");
     }
 }

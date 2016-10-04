@@ -7,15 +7,23 @@ import net.came20.interaktive.client.Interpreter;
 import net.came20.interaktive.command.CommandRoutable;
 import net.came20.interaktive.command.Commands;
 import net.came20.interaktive.command.parameter.*;
+import org.zeromq.ZMQ;
+
 import java.util.Scanner;
 
 public class CLI extends Interpreter {
 
     LogHelper logger = new LogHelper(this.getClass());
     Scanner scanner = new Scanner(System.in);
+    ZMQ.Context context;
+
+    public CLI(ZMQ.Context context) {
+        this.context = context;
+    }
 
     @Override
     public void run() {
+        /*
         //LogHelper.setEnabled(null, false);
         main:
         while (true) {
@@ -68,7 +76,6 @@ public class CLI extends Interpreter {
                 break command;
             }
 
-
+*/
         }
     }
-}

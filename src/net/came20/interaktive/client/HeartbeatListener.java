@@ -20,7 +20,7 @@ public class HeartbeatListener implements Runnable {
     public void run() {
         currentTime = System.currentTimeMillis() / 1000L;
         time = currentTime;
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             currentTime = System.currentTimeMillis() / 1000L;
             System.out.println(currentTime - time);
             if ((currentTime - time) > 60) {
@@ -38,7 +38,9 @@ public class HeartbeatListener implements Runnable {
             }
             try {
                 Thread.sleep(100);
-            } catch (Exception e) {}
+            } catch (InterruptedException ignored) {
+                break;
+            }
         }
     }
 }
